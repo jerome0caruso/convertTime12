@@ -1,0 +1,58 @@
+let newstr = "12:45:54PM";
+ 
+  function timeConversion(s){
+    let newArr = [];
+    let finalArr = [];
+    if(s.includes("PM")){
+       newArr = s.split("").map(item => Number(item))
+       finalArr = newArr.slice(0, 8);
+      return changeTime(finalArr);
+    } else if(s.includes("AM")){
+        newArr = s.split("").map(item => Number(item))
+       finalArr = newArr.slice(0, 8);
+        return checkAm(finalArr);
+    }
+    return newArr;
+  }
+
+    function checkAm(newArr){
+      if(newArr[0] === 1 && newArr[1] === 2) {
+          newArr[0] = 0;
+          newArr[1] = 0;
+          let find1 = newArr.findIndex(ele => isNaN(ele));
+          newArr.splice(find1, 1, ":")
+          newArr.splice(find1 + 3, 1, ":")
+          return newArr.join("")
+      } else{
+        let find1 = newArr.findIndex(ele => isNaN(ele));
+          newArr.splice(find1, 1, ":")
+          newArr.splice(find1 + 3, 1, ":")
+          return newArr.join("")
+      }
+    }
+        function changeTime(newArr) {
+          if(newArr[0] === 0){
+          newArr[1] += 12;
+          let find1 = newArr.findIndex(ele => isNaN(ele));
+          newArr.splice(find1, 1, ":")
+          newArr.splice(find1 + 3, 1, ":")
+          return newArr.join("").slice(1)
+        } else if (newArr[0] === 1 && newArr[1] === 2) {
+          newArr[0] = 1;
+          newArr[1] = 2;
+          let find1 = newArr.findIndex(ele => isNaN(ele));
+          newArr.splice(find1, 1, ":")
+          newArr.splice(find1 + 3, 1, ":")
+          return newArr.join("")
+        } else{
+          newArr[0] += 1
+          newArr[1] += 2 
+          let find1 = newArr.findIndex(ele => isNaN(ele));
+          newArr.splice(find1, 1, ":")
+          newArr.splice(find1 + 3, 1, ":")
+          return newArr.join("")
+        }
+        return newArr
+      }
+  
+
